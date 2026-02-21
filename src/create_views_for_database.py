@@ -3,7 +3,7 @@ from connect_to_database import *
 import os
 
 # this folder contains .txt files with sql queries that will be run
-input_folder = "views/"
+input_folder = "../views/"
 
 # get all files in input folder path
 files = [
