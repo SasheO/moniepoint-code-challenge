@@ -1,20 +1,20 @@
 # moniepoint-code-challenge
 
 ## About
-This directory contains code and sample data M. S. Ojuba for the moniepoint code challenge.
+This directory contains code and sample data Miss Ojuba used for the moniepoint code challenge.
 
 
 ## How to Use
-1. Load cleaned data into a PostgreSQL database. The as
-1. Create a .env file with the following values:
+1. Load cleaned data into a PostgreSQL database. The assumptions for "clean" data which I used in my testing are documented in the "Assumptions" section below.
+2. Create a .env file with the following values:
 ```
     DATABASE='''enter database name'''
     USER='''enter user name'''
     PASSWORD='''enter password'''
     TABLE_NAME='''enter table name with cleaned data'''
 ```
-2. Run `create_views_for_database.py` to create different views that will be queried by the server. The views correspond to what was requested in the specifications document. The SQL query for each view can be found in the `views/` folder.
-3. Run `run_server.py` to set up and run a local server.
+3. Run `create_views_for_database.py` to create different SQL table views that will be queried by 
+4. Run `run_server.py` to set up and run a local server.
 
 You can query the various endpoints this way.
 
@@ -23,9 +23,9 @@ I first cleaned the data using python, then loaded the data into a PostgreSQL da
 
 ## Problem Solving
 
-I first looked into the dataset to get an idea of what I was working with. I cleaned the dataset in python with clean_data.py code. 
+I first looked into the dataset to get an idea of what I was working with. I cleaned the dataset in python with `clean_data.py` code. 
 
-Then I imported a few CSV files into PostgreSQL database using the app's GUI and command line. I then created SQL views for each endpoint which I documented in the `views/` folder and ran in python with create_views_for_database.py. I chose views because they create a virtual table with the required results that can be easily called.
+Then I imported a few CSV files into PostgreSQL database using the app's GUI and command line. I then created SQL views for each endpoint which I documented in the `views/` folder and ran in python with `create_views_for_database.py`. I chose views because they create a virtual table with the required results that can be easily called.
 
 Then I created a Flask server run on port 8080 on the local host with the required endpoints that returned data in the right format. The function for each endpoint calls a view without needing complicated SQL queries.
 
