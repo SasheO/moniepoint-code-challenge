@@ -55,6 +55,19 @@ HAVING SUM(CASE WHEN status = 'SUCCESS' THEN 1 ELSE 0 END) > 0
 ORDER BY month;
 """
 
+failure_rates_view = """
+CREATE VIEW failure_rates AS
+SELECT product, 
+    ROUND(
+        100.0 * SUM(CASE WHEN status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(*),
+        1
+    ) AS failure_rate
+FROM merchant_activity_records
+where status = 'SUCCESS' or status = 'FAILED'
+group by product
+order by failure_rate desc;
+"""
+
 # TODO: Execute the SQL queries for each
 # below is how to execute for one
 cursor.execute(top_merchant_view)
