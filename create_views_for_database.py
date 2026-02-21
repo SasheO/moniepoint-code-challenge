@@ -2,6 +2,7 @@ from connect_to_database import *
 
 # create views for all needed queries
 top_merchant_view = """
+drop view if exists top_merchant;
 CREATE VIEW top_merchant AS
 select merchant_id, sum(amount) AS total_volume from merchant_activity_records
 where status  = 'SUCCESS'
@@ -11,6 +12,7 @@ limit 1;
 """
 
 product_adoption_view = """
+drop view if exists product_adoption;
 CREATE VIEW product_adoption AS
 SELECT product, COUNT(DISTINCT merchant_id) AS merchant_product_count
 FROM merchant_activity_records
@@ -19,6 +21,7 @@ order by merchant_product_count desc;
 """
 
 kyc_funnel_view = """
+drop view if exists kyc_funnel;
 CREATE VIEW kyc_funnel AS
 SELECT event_type, COUNT(DISTINCT merchant_id) AS successful_kyc_event_count
 FROM merchant_activity_records
@@ -27,6 +30,7 @@ group by event_type;
 """
 
 monthly_active_merchants_view = """
+drop view if exists monthly_active_merchants;
 CREATE VIEW monthly_active_merchants AS
 SELECT TO_CHAR(DATE_TRUNC('month', event_timestamp), 'YYYY-MM') AS month, COUNT(DISTINCT merchant_id) AS monthly_active_merchant_count
 FROM merchant_activity_records
@@ -38,6 +42,7 @@ ORDER BY month;
 """
 
 failure_rates_view = """
+drop view if exists failure_rates;
 CREATE VIEW failure_rates AS
 SELECT product, 
     ROUND(
