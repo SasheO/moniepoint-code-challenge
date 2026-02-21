@@ -3,15 +3,9 @@
 ## About
 This directory contains code and sample data M. S. Ojuba for the moniepoint code challenge.
 
-## Assumptions 
-I first cleaned the data using python, then loaded the data into a PostgreSQL dataset. The data cleaning involved changing invalid values in the "amount" column to 0.
-
-## Method
-
-I first looked into the dataset to get an idea of what I was working with. I cleaned the dataset in python with clean_data.py code. Then I imported a few CSV files into PostgreSQL database using the app's GUI and command line. I then created SQL views for each endpoint which I documented in the views/ folder and ran in python with create_views_for_database.py. Then I created a Flask server run on port 8080 on the local host with the required endpoints that returned data in the right format. 
 
 ## How to Use
-With the database and table set up, this is what you need to do to run the server:
+1. Load cleaned data into a PostgreSQL database. The as
 1. Create a .env file with the following values:
 ```
     DATABASE='''enter database name'''
@@ -23,6 +17,22 @@ With the database and table set up, this is what you need to do to run the serve
 3. Run `run_server.py` to set up and run a local server.
 
 You can query the various endpoints this way.
+
+## Assumptions 
+I first cleaned the data using python, then loaded the data into a PostgreSQL dataset. The data cleaning involved changing invalid values in the "amount" column to 0 and skipping records where "event_timestamp" value was "NOT-A-DATE".
+
+## Problem Solving
+
+I first looked into the dataset to get an idea of what I was working with. I cleaned the dataset in python with clean_data.py code. 
+
+Then I imported a few CSV files into PostgreSQL database using the app's GUI and command line. I then created SQL views for each endpoint which I documented in the `views/` folder and ran in python with create_views_for_database.py. I chose views because they create a virtual table with the required results that can be easily called.
+
+Then I created a Flask server run on port 8080 on the local host with the required endpoints that returned data in the right format. The function for each endpoint calls a view without needing complicated SQL queries.
+
+With this method, 
+* more SQL views can be programmatically added by including a new .txt file in the `views/` folder.
+* New endpoints can be added to the `run_server.py` folder.
+
 
 ## Descriptions of Sub Folders/Files
 
