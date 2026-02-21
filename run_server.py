@@ -21,7 +21,10 @@ def get_monthly_active_merchants():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  monthly_active_merchants;")
         response = cursor.fetchall()
-        return jsonify(response), 200
+        output = {}
+        for tup in response:
+            output[tup[0]] = tup[1]
+        return jsonify(output), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
