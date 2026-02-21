@@ -1,23 +1,4 @@
-from dotenv import load_dotenv
-import os
-import psycopg2
-
-# get environment variables
-load_dotenv()
-database = os.getenv("DATABASE")
-user = os.getenv("USER")
-password= os.getenv("PASSWORD")
-table_name = os.getenv("TABLE_NAME")
-
-# Connect to PostgreSQL
-conn = psycopg2.connect(
-    host="localhost",
-    database=database,
-    user=user,
-    password=password
-)
-
-cursor = conn.cursor()
+from connect_to_database import *
 
 # create views for all needed queries
 top_merchant_view = """
@@ -69,11 +50,14 @@ group by product
 order by failure_rate desc;
 """
 
-# TODO: Execute the SQL queries for each
-# below is how to execute for one
-cursor.execute(top_merchant_view)
-conn.commit()  # commit changes
+if __name__ == "__main__":
+    # TODO: Execute the SQL queries for each
+    # below is how to execute for one
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(top_merchant_view)
+    conn.commit()  # commit changes
 
-# close connection to database
-cursor.close()
-conn.close()
+    # close connection to database
+    cursor.close()
+    conn.close()

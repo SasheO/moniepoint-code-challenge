@@ -10,9 +10,11 @@ password= os.getenv("PASSWORD")
 table_name = os.getenv("TABLE_NAME")
 
 # Connect to PostgreSQL
-conn = psycopg2.connect(
-    host="localhost",
-    database=database,
-    user=user,
-    password=password
-)
+
+def get_db_connection():
+    return psycopg2.connect(
+        host="localhost",
+        database=database,
+        user=user,
+        password=password
+    )
