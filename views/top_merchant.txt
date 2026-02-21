@@ -1,0 +1,7 @@
+drop view if exists top_merchant;
+CREATE VIEW top_merchant AS
+select merchant_id, sum(amount) AS total_volume from merchant_activity_records
+where status  = 'SUCCESS'
+group by merchant_id
+order by total_volume desc
+limit 1;

@@ -1,0 +1,11 @@
+drop view if exists failure_rates;
+CREATE VIEW failure_rates AS
+SELECT product, 
+    ROUND(
+        100.0 * SUM(CASE WHEN status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(*),
+        1
+    ) AS failure_rate
+FROM merchant_activity_records
+where status = 'SUCCESS' or status = 'FAILED'
+group by product
+order by failure_rate desc;
