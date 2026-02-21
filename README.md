@@ -6,6 +6,10 @@ This directory contains code and sample data M. S. Ojuba for the moniepoint code
 ## Assumptions 
 I first cleaned the data using python, then loaded the data into a PostgreSQL dataset. The data cleaning involved changing invalid values in the "amount" column to 0.
 
+## Method
+
+I first looked into the dataset to get an idea of what I was working with. I cleaned the dataset in python with clean_data.py code. Then I imported a few CSV files into PostgreSQL database using the app's GUI and command line. I then created SQL views for each endpoint which I documented in the views/ folder and ran in python with create_views_for_database.py. Then I created a Flask server run on port 8080 on the local host with the required endpoints that returned data in the right format. 
+
 ## How to Use
 With the database and table set up, this is what you need to do to run the server:
 1. Create a .env file with the following values:
