@@ -45,6 +45,16 @@ where product = 'KYC' and status = 'SUCCESS'
 group by event_type;
 """
 
+monthly_active_merchants_view = """
+CREATE VIEW monthly_active_merchants AS
+SELECT TO_CHAR(DATE_TRUNC('month', event_timestamp), 'YYYY-MM') AS month, COUNT(DISTINCT merchant_id) AS monthly_active_merchant_count
+FROM merchant_activity_records
+-- WHERE status = 'SUCCESS'
+GROUP BY month
+HAVING SUM(CASE WHEN status = 'SUCCESS' THEN 1 ELSE 0 END) > 0
+ORDER BY month;
+"""
+
 # TODO: Execute the SQL queries for each
 # below is how to execute for one
 cursor.execute(top_merchant_view)
