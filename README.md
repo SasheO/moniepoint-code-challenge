@@ -4,11 +4,10 @@
 This directory contains code and sample data M. S. Ojuba for the moniepoint code challenge.
 
 ## Assumptions 
-I tested the code on five days of sample data from January 27 to 31.
-While loading the data into PostgreSQL, I changed invalid values in "amount" column to 0.
-
+I first cleaned the data using python, then loaded the data into a PostgreSQL dataset. The data cleaning involved changing invalid values in the "amount" column to 0.
 
 ## How to Use
+With the database and table set up, this is what you need to do to run the server:
 1. Create a .env file with the following values:
 ```
     DATABASE='''enter database name'''

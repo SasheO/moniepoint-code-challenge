@@ -10,7 +10,7 @@ def get_top_merchant():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM top_merchant;")
         response = cursor.fetchall()
-        return jsonify(response)
+        return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -21,7 +21,7 @@ def get_monthly_active_merchants():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  monthly_active_merchants;")
         response = cursor.fetchall()
-        return jsonify(response)
+        return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -32,7 +32,7 @@ def get_product_adoption():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  product_adoption;")
         response = cursor.fetchall()
-        return jsonify(response)
+        return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -43,7 +43,7 @@ def get_kyc_funnel():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  kyc_funnel;")
         response = cursor.fetchall()
-        return jsonify(response)
+        return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -54,7 +54,7 @@ def get_failure_rates():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  failure_rates;")
         response = cursor.fetchall()
-        return jsonify(response)
+        return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
