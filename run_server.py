@@ -10,7 +10,8 @@ def get_top_merchant():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM top_merchant;")
         response = cursor.fetchall()
-        return jsonify(response), 200
+        output = {"merchant_id": response[0][0], "total_volume":float(response[0][1])}
+        return jsonify(output), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -35,7 +36,10 @@ def get_product_adoption():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  product_adoption;")
         response = cursor.fetchall()
-        return jsonify(response), 200
+        output = {}
+        for tup in response:
+            output[tup[0]] = tup[1]
+        return jsonify(output), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -46,7 +50,11 @@ def get_kyc_funnel():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  kyc_funnel;")
         response = cursor.fetchall()
-        return jsonify(response), 200
+        output = {}
+        for tup in response:
+            output[tup[0]] = tup[1]
+        return jsonify(output), 200
+        
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -57,7 +65,16 @@ def get_failure_rates():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM  failure_rates;")
         response = cursor.fetchall()
-        return jsonify(response), 200
+
+        output = []
+        '''
+        [{"product": "BILLS", "failure_rate": 5.2}, {"product": "AIRTIME", "failure_rate": 4.1}, ...] 
+        '''
+        for tup in response:
+            output.append({tup[0]: float(tup[1])})
+        return jsonify(output), 200
+        # return jsonify(response), 200
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
