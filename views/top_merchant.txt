@@ -1,6 +1,6 @@
 drop view if exists top_merchant;
 CREATE VIEW top_merchant AS
-select merchant_id, sum(amount) AS total_volume from merchant_activity_records
+select merchant_id, sum(amount) AS total_volume from __table_name__
 where status  = 'SUCCESS'
 group by merchant_id
 order by total_volume desc

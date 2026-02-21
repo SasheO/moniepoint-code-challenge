@@ -18,7 +18,8 @@ if __name__ == "__main__":
     cursor = conn.cursor()
     for filename in files:
         with open(filename, "r") as file:
-            sql_view_query = file.read()      
+            sql_view_query = file.read().replace("__table_name__", table_name)
+
         cursor.execute(sql_view_query)
         conn.commit()
 

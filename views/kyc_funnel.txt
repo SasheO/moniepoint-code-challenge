@@ -3,6 +3,6 @@
 drop view if exists kyc_funnel;
 CREATE VIEW kyc_funnel AS
 SELECT event_type, COUNT(DISTINCT merchant_id) AS successful_kyc_event_count
-FROM merchant_activity_records
+FROM __table_name__
 where product = 'KYC' and status = 'SUCCESS'
 group by event_type;

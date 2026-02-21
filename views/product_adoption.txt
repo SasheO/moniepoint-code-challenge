@@ -3,6 +3,6 @@
 drop view if exists product_adoption;
 CREATE VIEW product_adoption AS
 SELECT product, COUNT(DISTINCT merchant_id) AS merchant_product_count
-FROM merchant_activity_records
+FROM __table_name__
 group by product
 order by merchant_product_count desc;
